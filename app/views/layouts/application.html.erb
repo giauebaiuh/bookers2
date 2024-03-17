@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/e8b791ab90.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="/"><span>Bookers</span></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+              <li class="nav-link text-light">
+                <%= link_to user_path(current_user) do %>
+                <strong class="text-white"><i class="fa-solid fa-house"></i><span>Home</span></strong>
+                <%end%>
+              </li>
+              <li class="nav-link text-light">
+                <%= link_to(users_path) do %>
+                <strong class="text-white"><i class="fa-solid fa-users"></i><span>Users</span></strong>
+                <%end%>
+              </li>
+             <li>
+                <%= link_to books_path, class: 'nav-link text-white' do %>
+                  <i class="fas fa-book-open"></i> Books
+                <% end %>
+              </li>
+              <li class="nav-link text-light">
+                <%= link_to(destroy_user_session_path, method: :delete) do %>
+                <strong class="text-white"><i class="fa-solid fa-right-from-bracket"></i><span>Log out</span></strong>
+                <%end%>
+              </li>
+            <%else%>
+              <li class="nav-link text-light">
+                <%= link_to(root_path) do %>
+                <strong class="text-white"><i class="fa-solid fa-house"></i><span>Home</span></strong>
+                <%end%>
+              </li>
+              <li class="nav-link text-light">
+                <%= link_to(home_about_path) do %>
+                <strong class="text-white"><i class="fa-solid fa-link"></i><span>About</span></strong>
+                <%end%>
+              </li>
+              <li class="nav-link text-light">
+                <%= link_to(new_user_registration_path) do %>
+                <strong class="text-white"><i class="fa-solid fa-user-plus"></i><span>Sign up</span></strong>
+                <%end%>
+              </li>
+              <li class="nav-link text-light">
+                <%= link_to(new_user_session_path) do %>
+                <strong class="text-white"><i class="fa-solid fa-right-to-bracket"></i><span>Log in</span></strong>
+                <%end%>
+              </li>
+            <%end%>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+    <footer class="container mt-5">
+      <div class="row">
+        <div class="mx-auto">
+          <p>CopyRight Infratop.Inc</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
